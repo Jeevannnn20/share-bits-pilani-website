@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Open+Sans:wght@800&family=Montserrat:wght@800&display=swap");
+@import "tailwindcss";
+
+/* ShARE colours, sampled from the logo files:
+   green #03C883, charcoal dot #2F2D2E, grey dot #ACACAC, tagline grey #545454, white.
+   Cream #FDF4EE comes from the pitch deck. Brand green is too light for text on
+   cream, so text and links use --green-deep.
+   Type: Inter throughout; the wordmark uses Open Sans ExtraBold + Montserrat ExtraBold. */
+@theme {
+  --color-background: #fdf4ee;
+  --color-paper: #f6eae1;
+  --color-card: #ffffff;
+  --color-foreground: #2f2d2e;
+  --color-muted-foreground: #545454;
+  --color-line: rgb(47 45 46 / 0.12);
+  --color-line-strong: rgb(47 45 46 / 0.3);
+  --color-border: rgb(47 45 46 / 0.12);
+  --color-primary: #03c883;
+  --color-primary-hover: #1fd795;
+  --color-primary-foreground: #2f2d2e;
+  --color-green-deep: #04794f;
+  --color-green-soft: #d9f6ea;
+  --color-ink: #2f2d2e;
+  --color-ink-2: #393738;
+  --color-ink-3: #454243;
+  --color-ink-line: rgb(253 244 238 / 0.16);
+  --color-dot: #acacac;
+  --color-ring: #04794f;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-logo: "Open Sans", "Inter", sans-serif;
+  --font-logo-sub: "Montserrat", "Inter", sans-serif;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee 50s linear infinite;
+  --animate-orbit: orbit 2.4s linear infinite;
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes orbit {
+    to { transform: rotate(360deg); }
+  }
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-primary); color: var(--color-ink); }
+  :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; border-radius: 6px; }
+  a, button, [role="button"], summary { cursor: pointer; }
+}
+
+@layer components {
+  .display { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.045em; line-height: 0.98; }
+  .display-md { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.025em; line-height: 1.12; }
+  .label { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.4; }
+  .container-site { width: 100%; max-width: 90rem; margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 640px) { .container-site { padding-inline: 1.75rem; } }
+  @media (min-width: 1024px) { .container-site { padding-inline: 2.5rem; } }
+  .pill { display: inline-flex; align-items: center; border: 1px solid var(--color-line-strong); border-radius: 999px; padding: 0.3em 0.9em; line-height: 1.4; white-space: nowrap; }
+}
+
+/* Card grids: every direct child becomes a soft rounded card. */
+.cells > * { border-radius: var(--radius-lg); background: var(--color-card); overflow: hidden; }
+.cells-dark > * { border-radius: var(--radius-lg); background: var(--color-ink-2); overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
